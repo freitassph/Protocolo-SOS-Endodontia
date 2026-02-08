@@ -1,0 +1,44 @@
+/* Base styles managed by Tailwind CDN, adding custom overrides here */
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Custom Utilities */
+.font-serif-text {
+  font-family: 'Libre Baskerville', serif;
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+.min-h-touch {
+  min-height: 44px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1; 
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155; 
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8; 
+}
