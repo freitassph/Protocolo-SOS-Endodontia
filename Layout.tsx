@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Home, Activity, FileText, MessageSquare, Menu, X, Moon, Sun, Search, Book, HelpCircle, Compass } from 'lucide-react';
-import { ViewState } from '../types';
+import { Home, Activity, FileText, MessageSquare, Menu, X, Moon, Sun, Search, Book, Compass } from 'lucide-react';
+import { ViewState } from './types';
 
 interface LayoutProps {
   children: React.ReactNode;

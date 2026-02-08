@@ -1,6 +1,6 @@
 import React from 'react';
 import { SCRIPTS } from '../data';
-import { MessageSquare, Quote } from 'lucide-react';
+import { Quote } from 'lucide-react';
 import { Card } from './ui/Card';
 
 export const ScriptList: React.FC = () => {

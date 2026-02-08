@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { REFERENCE_TABLES, PRE_PROCEDURE_CHECKLIST, FAQS } from '../data';
 import { Card } from './ui/Card';
-import { CheckCircle2, HelpCircle, Table as TableIcon, ClipboardCheck, Circle, Calculator, Search, AlertCircle, TrendingUp, DollarSign } from 'lucide-react';
+import { CheckCircle2, HelpCircle, Table as TableIcon, ClipboardCheck, Circle, Calculator, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useApp } from '../context/AppContext';
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Layout } from './components/Layout';
 import { Hero } from './components/Hero';
 import { DiagnosisWizard } from './components/DiagnosisWizard';
