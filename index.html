@@ -58,9 +58,6 @@
     fbq('init', 'YOUR-PIXEL-ID');
     fbq('track', 'PageView');
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=YOUR-PIXEL-ID&ev=PageView&noscript=1"
-    /></noscript>
     <!-- End Meta Pixel Code -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -117,6 +114,12 @@
 </script>
 </head>
   <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 overflow-x-hidden selection:bg-accent-500/30">
+    <!-- Meta Pixel Code (NoScript Fallback) -->
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=YOUR-PIXEL-ID&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>
