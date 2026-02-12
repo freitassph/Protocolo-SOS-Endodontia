@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, XCircle, RefreshCw, Stethoscope, ScanLine, ArrowRight, ClipboardList, AlertTriangle, ArrowLeft } from 'lucide-react';
+import { CheckCircle2, XCircle, Stethoscope, ArrowRight, ClipboardList, AlertTriangle, ArrowLeft } from 'lucide-react';
 import { Card } from './ui/Card';
 import { DIAGNOSIS_STEPS, PROTOCOLS } from '../data';
 import { useApp } from '../context/AppContext';
@@ -104,7 +104,6 @@ export const DiagnosisWizard: React.FC = () => {
 
   // Progress logic
   const totalStepsEstimate = 7; 
-  const progressPercent = Math.min(100, ((history.length + 1) / totalStepsEstimate) * 100);
 
   if (showSummary && summaryInfo) {
       return (

@@ -10,7 +10,6 @@ interface CardProps {
 
 export const Card: React.FC<CardProps> = ({ children, className = '', onClick, noPadding = false }) => {
   const divRef = useRef<HTMLDivElement>(null);
-  const [isFocused, setIsFocused] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
 
@@ -24,12 +23,10 @@ export const Card: React.FC<CardProps> = ({ children, className = '', onClick, n
   };
 
   const handleFocus = () => {
-    setIsFocused(true);
     setOpacity(1);
   };
 
   const handleBlur = () => {
-    setIsFocused(false);
     setOpacity(0);
   };
 
