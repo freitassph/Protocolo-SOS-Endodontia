@@ -1,5 +1,3 @@
-
-
 import { Protocol, Prescription, Script, FAQItem, ReferenceTable, ChecklistSection, PainPoint, DiagnosisStep } from './types';
 
 export const MANIFESTO_INTRO = {
@@ -129,7 +127,7 @@ export const DIAGNOSIS_STEPS: Record<string, DiagnosisStep> = {
   biting: {
     id: 'biting',
     question: "A dor é PRINCIPALMENTE ao morder ou tocar no dente?",
-    description: "Indica inflamação no ligamento periodontal (Pericementite) ou Abscesso Crônico/Fênix.",
+    description: "Indica inflamação no ligamento periodontal (Periodontite Apical Sintomática) ou Abscesso Periapical Inicial.",
     clinicalSigns: [
       "Percussão Vertical: DOR INTENSA (+++). É o sinal patognomônico.",
       "Sensação: 'Dente crescido' ou 'alto'.",
@@ -141,7 +139,7 @@ export const DIAGNOSIS_STEPS: Record<string, DiagnosisStep> = {
       "Lesão radiolúcida (bolinha preta) no ápice."
     ],
     yesNext: 'result',
-    resultId: 'p2', // Pericementite / Abscesso Crônico
+    resultId: 'p2', // Periodontite Apical Sintomática / Abscesso Periapical Inicial
     noNext: 'provoked'
   },
   provoked: {
@@ -196,7 +194,7 @@ export const PROTOCOLS: Protocol[] = [
       'Limas K-File #10, #15, #20',
       'Hipoclorito de Sódio 2.5% (Seringa 3ml)',
       'Hidróxido de Cálcio (Pasta)',
-      'IRM ou Resina Provisória'
+      'CIV (Ionômero de Vidro) ou Resina Provisória'
     ],
     steps: [
       {
@@ -256,9 +254,9 @@ export const PROTOCOLS: Protocol[] = [
         title: 'Passo 6: Fechamento Provisório',
         type: 'info',
         content: [
-          'Feche hermeticamente com IRM ou Resina Fluida sobre o curativo.',
+          'Feche hermeticamente com CIV (cimento de ionômero de vidro) ou Resina Fluida sobre o curativo.',
           'Cheque a oclusão com papel carbono (deixe infra-oclusão).',
-          'AVISO: Se o paciente mastigar alto, a dor voltará em 12h (Pericementite secundária).'
+          'AVISO: Se o paciente mastigar alto, a dor voltará em 12h (Periodontite Apical secundária).'
         ],
         duration: '2 min'
       },
@@ -281,8 +279,8 @@ export const PROTOCOLS: Protocol[] = [
   },
   {
     id: 'p2',
-    title: 'Pericementite / Abscesso Crônico',
-    shortTitle: 'P2: Necrose/Abscesso (Drenagem Apical)',
+    title: 'Periodontite Apical Sintomática / Abscesso Periapical Inicial',
+    shortTitle: 'P2: Periodontite/Abscesso (Drenagem Apical)',
     description: 'A infecção saiu do dente e está no osso. Dor ao toque (percussão). Objetivo: Limpar o canal e drenar via ápice.',
     color: 'bg-amber-500',
     iconName: 'AlertTriangle',
@@ -290,7 +288,7 @@ export const PROTOCOLS: Protocol[] = [
       'Articaína 4%', 
       'Limas K #10, #15, #20', 
       'Hipoclorito 2.5% (Alto Volume)', 
-      'Hidróxido de Cálcio + Iodofórmio',
+      'Hidróxido de Cálcio',
       'Seringa 5mL ou 10mL'
     ],
     steps: [
@@ -339,8 +337,7 @@ export const PROTOCOLS: Protocol[] = [
         type: 'checklist',
         content: [
           'Seque o canal com pontas de papel.',
-          'Misture Hidróxido de Cálcio com Iodofórmio (pó amarelo) e soro/anestésico.',
-          'O Iodofórmio é potente bactericida e deixa a pasta radiopaca.',
+          'Misture Hidróxido de Cálcio com soro fisiológico.',
           'Preencha bem o canal.'
         ],
         duration: '3 min'
@@ -349,7 +346,7 @@ export const PROTOCOLS: Protocol[] = [
         title: 'Passo 5: Decisão de Fechamento',
         type: 'text',
         content: [
-          'CENÁRIO A (Pouco pus): Feche com IRM.',
+          'CENÁRIO A (Pouco pus): Feche com CIV ou Resina Provisória (tipo Applic).',
           'CENÁRIO B (Muito pus/Drenagem ativa): NÃO FECHE completamente. Coloque bolinha de algodão na entrada e deixe drenar por 24h. Paciente retorna amanhã.'
         ],
         duration: '2 min'
@@ -428,7 +425,7 @@ export const PROTOCOLS: Protocol[] = [
         title: 'Passo 4: Prescrição de Ataque',
         type: 'prescription',
         content: [
-          'Amoxicilina 500mg de 6/6 horas (Dose aumentada). 14 dias.',
+          'Amoxicilina 875mg + Clavulanato de potássio 125mg, 1cp, 12/12h, 10 dias.',
           'Se grave: Associar Metronidazol 400mg.',
           'Monitorar febre a cada 4h. Se subir -> HOSPITAL.'
         ]
@@ -495,10 +492,11 @@ export const PROTOCOLS: Protocol[] = [
         title: 'CENÁRIO B: Exposição maior (>1mm) ou tempo (2-6h)',
         type: 'checklist',
         content: [
-          'Técnica: Pulpotomia (Cvek).',
+          'Técnica: Pulpotomia',
           'Use broca esférica diamantada nova, alta rotação, refrigeração máxima.',
           'Remova 2mm de polpa superficial (tecido inflamado).',
           'Lave até parar de sangrar (hemostasia em 2-3 min).',
+          'EMBEBA UMA BOLA DE ALGODÃO ESTERILIZADA EM OTOSPORIN E COLOQUE SOBRE O REMANESCENTE PULPAR POR 5 MINUTOS PARA FACILITAR A HEMOSTASIA E EVITAR INFECÇÃO.',
           'Se parar de sangrar: Cubra com MTA -> Ionômero -> Resina.',
           'Se NÃO parar de sangrar: Inflamação é profunda -> Vá para Protocolo 1 (Canal).'
         ],
@@ -582,7 +580,7 @@ export const PROTOCOLS: Protocol[] = [
     description: 'Dor provocada (frio/doce) que passa rápido (<10s). A polpa está sadia, só irritada. O tratamento é RESTAURADOR, não endodôntico.',
     color: 'bg-teal-600',
     iconName: 'Shield',
-    materials: ['Brocas Esféricas', 'Cimento de Hidróxido de Cálcio (Dycal)', 'Cimento Ionômero de Vidro', 'Resina', 'Papel Carbono'],
+    materials: ['Brocas Esféricas', 'Cimento Ionômero de Vidro', 'Resina', 'Papel Carbono'],
     steps: [
       {
         title: 'O Teste Definitivo',
@@ -607,9 +605,10 @@ export const PROTOCOLS: Protocol[] = [
         title: 'Passo 2: Proteção Pulpar',
         type: 'checklist',
         content: [
-          'Lave com Clorexidina 2%. Não resseque a dentina.',
-          'Cavidade profunda? Aplique forramento de Hidróxido de Cálcio (Dycal) no ponto mais fundo.',
-          'Cubra o Dycal com Cimento de Ionômero de Vidro (base).'
+          'Lave com clorexidina.',
+          'Seque com bolinha de algodão esterilizada ou discos de papel absorvente.',
+          'Coloque cimento de ionômero de vidro.',
+          'Restaure com resina fluida, bulk fill ou comum.'
         ],
         duration: '5 min'
       },
@@ -617,7 +616,7 @@ export const PROTOCOLS: Protocol[] = [
         title: 'Passo 3: Restauração Definitiva',
         type: 'text',
         content: [
-          'Não use provisório (infiltra). Faça a restauração definitiva em Resina/Amálgama agora.',
+          'Não use provisório (infiltra). Faça a restauração definitiva em resina agora.',
           'O selamento perfeito é o que cura a polpa.',
           'Ajuste oclusal minucioso.'
         ],
@@ -659,12 +658,12 @@ export const PRESCRIPTIONS: Prescription[] = [
   },
   {
     id: 'rx2',
-    title: 'Abscesso / Pericementite',
+    title: 'Periodontite Apical Sintomática / Abscesso Periapical Inicial',
     condition: 'Dor ao morder, inchaço leve localizado, presença de pus.',
     medications: [
       { name: 'Amoxicilina', dose: '500mg', frequency: 'A cada 8 horas', duration: '10 dias COMPLETOS', observation: 'Horários rígidos (ex: 7h, 15h, 23h). Não pular.', isAntibiotic: true },
       { name: 'Ibuprofeno', dose: '600mg', frequency: 'A cada 6 horas', duration: '5 a 7 dias', observation: 'Anti-inflamatório principal.' },
-      { name: 'Dipirona Sódica', dose: '500mg', frequency: 'A cada 4 horas', duration: '3 a 5 dias', observation: 'Para dor residual.' },
+      { name: 'Dipirona Sódica', dose: '1g', frequency: 'A cada 6 horas', duration: '3 a 5 dias', observation: 'Para dor residual.' },
       { name: 'Omeprazol', dose: '20mg', frequency: '1x ao dia', duration: '10 dias', observation: 'Proteção gástrica obrigatória.' }
     ],
     warning: 'O paciente DEVE terminar os 10 dias de antibiótico para evitar resistência bacteriana.',
@@ -680,10 +679,10 @@ export const PRESCRIPTIONS: Prescription[] = [
     title: 'Abscesso Sistêmico (Grave)',
     condition: 'Febre > 37.8°C, Trismo, Edema facial visível/difuso.',
     medications: [
-      { name: 'Amoxicilina', dose: '500mg', frequency: 'A cada 6 horas', duration: '14 dias', observation: 'DOSE AUMENTADA. Rigor absoluto no horário.', isAntibiotic: true },
-      { name: 'Metronidazol', dose: '400mg', frequency: 'A cada 8 horas', duration: '7 dias', observation: 'Adicionar APENAS se houver cheiro fétido/anaeróbios.', isAntibiotic: true },
+      { name: 'Amoxicilina + Clavulanato', dose: '875mg + 125mg', frequency: 'A cada 12 horas', duration: '10 dias', observation: 'Rigor absoluto no horário.', isAntibiotic: true },
+      { name: 'Toragesic (Cetorolaco)', dose: '10mg', frequency: 'A cada 6 horas', duration: '5 dias', observation: 'Se dor intensa. Sublingual.' },
       { name: 'Ibuprofeno', dose: '600mg', frequency: 'A cada 6 horas', duration: '7 dias', observation: 'Reduz inflamação e dor.' },
-      { name: 'Dipirona', dose: '1g', frequency: 'A cada 4 horas', duration: 'Enquanto houver febre/dor', observation: 'Controle térmico.' },
+      { name: 'Dipirona', dose: '1g', frequency: 'A cada 6 horas', duration: 'Enquanto houver febre/dor', observation: 'Controle térmico.' },
       { name: 'Omeprazol', dose: '20mg', frequency: '1x ao dia', duration: '14 dias', observation: 'Jejum.' }
     ],
     warning: 'RISCO DE VIDA. Se houver dificuldade respiratória: HOSPITAL IMEDIATO.',
@@ -829,7 +828,7 @@ export const REFERENCE_TABLES: ReferenceTable[] = [
     headers: ['Situação', 'Protocolo', 'Sucesso Estimado'],
     rows: [
       ['Pulpite Simples (1ª vez)', 'Protocolo 1', '95%'],
-      ['Abscesso Crônico Localizado', 'Protocolo 2', '85%'],
+      ['Periodontite Apical Sintomática / Abscesso Periapical Inicial', 'Protocolo 2', '85%'],
       ['Abscesso Agudo (sem febre alta)', 'Protocolo 3', '90%'],
       ['Trauma Exp. < 2mm (< 2h)', 'Protocolo 4A', '90%'],
       ['Trauma Exp. 1-3mm (< 6h)', 'Protocolo 4B', '70%'],
@@ -842,7 +841,7 @@ export const REFERENCE_TABLES: ReferenceTable[] = [
     id: 't3',
     title: 'Cronograma do Procedimento',
     description: 'Tempo médio estimado por etapa.',
-    headers: ['Etapa', 'P1 (Pulpite)', 'P2 (Crônico)', 'P3 (Agudo)', 'P4 (Trauma)'],
+    headers: ['Etapa', 'P1 (Pulpite)', 'P2 (Periodontite)', 'P3 (Agudo)', 'P4 (Trauma)'],
     rows: [
       ['Anestesia', '5-10 min', '5 min', '5-10 min', '3-5 min'],
       ['Acesso', '3-5 min', '3 min', '3 min', '2-3 min'],
@@ -906,11 +905,11 @@ export const PRE_PROCEDURE_CHECKLIST: ChecklistSection[] = [
     items: [
       'Articaína 4% com Epi',
       'Agulhas 27G (Longa) e 30G (Curta)',
-      'Brocas: 1014 HL, Redonda #4',
+      'Broca: 1014 HL, Redonda #4',
       'Limas K-file #10, #15, #20',
       'Hipoclorito de Sódio 2.5% + Seringa',
       'Hidróxido de Cálcio (Pasta)',
-      'IRM ou Cimento Provisório',
+      'CIV ou Cimento Provisório',
       'Fio de algodão (para drenagem)'
     ]
   },
