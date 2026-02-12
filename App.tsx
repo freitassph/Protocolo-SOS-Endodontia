@@ -10,7 +10,6 @@ import { ManifestoView } from './components/ManifestoView';
 import { PROTOCOLS, PRESCRIPTIONS, FAQS } from './data';
 import { AppProvider, useApp } from './context/AppContext';
 import { ToastProvider } from './hooks/useToast';
-import { Card } from './components/ui/Card';
 import { Activity, Pill, HelpCircle, ChevronRight, Search } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -148,7 +147,7 @@ const MainAppContent = () => {
             return <DiagnosisWizard />;
           case 'protocols':
             return (
-              <div className="max-w-4xl mx-auto px-4">
+              <div className="max-w-4xl mx-auto px-4 py-8">
                  <motion.h2 
                     initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
                     className="text-3xl font-bold text-slate-900 dark:text-white mb-8"
@@ -163,13 +162,19 @@ const MainAppContent = () => {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.05 }}
                        >
-                           <Card onClick={() => navigate('protocol-detail', p.id)} className="hover:border-accent-400 group h-full">
-                              <div className={`w-12 h-12 rounded-xl mb-4 ${p.color} flex items-center justify-center text-white font-bold text-xl shadow-lg`}>
-                                {p.id.replace('p', '')}
-                              </div>
-                              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-accent-500 transition-colors">{p.title}</h3>
-                              <p className="text-slate-500 dark:text-slate-400 text-sm line-clamp-2">{p.description}</p>
-                           </Card>
+                           {/* Using the standard Card now, Spotlight effect is built in */}
+                           <div onClick={() => navigate('protocol-detail', p.id)} className="h-full">
+                            <div className={`bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-slate-300 dark:hover:border-slate-700 transition-all cursor-pointer h-full group relative overflow-hidden`}>
+                                <div className={`absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity`}>
+                                     <div className={`w-24 h-24 rounded-full ${p.color} blur-xl`} />
+                                </div>
+                                <div className={`w-12 h-12 rounded-xl mb-4 ${p.color} flex items-center justify-center text-white font-bold text-xl shadow-lg relative z-10`}>
+                                    {p.id.replace('p', '')}
+                                </div>
+                                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 relative z-10">{p.title}</h3>
+                                <p className="text-slate-500 dark:text-slate-400 text-sm line-clamp-2 relative z-10">{p.description}</p>
+                            </div>
+                           </div>
                        </motion.div>
                     ))}
                  </div>
@@ -192,7 +197,7 @@ const MainAppContent = () => {
     };
 
     return (
-        <Layout>
+        <Layout focusMode={currentView === 'diagnosis'}>
             <AnimatePresence mode="wait">
                 <motion.div
                     key={currentView}

@@ -6,9 +6,10 @@ import { useApp } from '../context/AppContext';
 
 interface LayoutProps {
   children: React.ReactNode;
+  focusMode?: boolean;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
+export const Layout: React.FC<LayoutProps> = ({ children, focusMode = false }) => {
   const { currentView, navigate, isDark, toggleTheme, toggleSearch } = useApp();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -18,13 +19,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, [currentView]);
 
   const navItems = [
-    { id: 'home', label: 'Início', icon: Home },
-    { id: 'manifesto', label: 'Sobre o Guia', icon: Compass },
+    { id: 'home', label: 'Painel', icon: Home },
     { id: 'diagnosis', label: 'Diagnóstico', icon: Activity },
     { id: 'protocols', label: 'Protocolos', icon: FileText },
     { id: 'prescriptions', label: 'Prescrições', icon: FileText },
     { id: 'scripts', label: 'Scripts', icon: MessageSquare },
-    { id: 'references', label: 'Ferramentas & FAQ', icon: Book },
+    { id: 'references', label: 'Ferramentas', icon: Book },
+    { id: 'manifesto', label: 'Manifesto', icon: Compass },
   ];
 
   const SidebarItem: React.FC<{ item: typeof navItems[0], isMobile?: boolean }> = ({ item, isMobile = false }) => {
@@ -32,18 +33,23 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
      return (
         <button
             onClick={() => navigate(item.id as ViewState)}
-            className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none touch-manipulation ${
+            className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none touch-manipulation group ${
             isActive
                 ? 'bg-primary-50 dark:bg-primary-900/40 text-primary-900 dark:text-primary-100 shadow-sm border border-primary-100 dark:border-primary-800'
                 : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50'
             }`}
         >
-            <item.icon className={`w-5 h-5 ${isActive ? 'text-accent-500' : 'text-slate-400'}`} />
+            <item.icon className={`w-5 h-5 transition-transform group-hover:scale-110 ${isActive ? 'text-accent-500' : 'text-slate-400'}`} />
             <span className={isMobile ? 'text-base font-semibold' : ''}>{item.label}</span>
             {isMobile && <ChevronRight className="w-4 h-4 ml-auto text-slate-300 dark:text-slate-600" />}
         </button>
      );
   };
+
+  // Focus Mode View (No Layout Shell)
+  if (focusMode) {
+      return <main className="min-h-screen bg-slate-50 dark:bg-slate-950">{children}</main>;
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex transition-colors duration-300">
@@ -51,8 +57,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex flex-col w-64 fixed h-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-r border-slate-200 dark:border-slate-800 z-50">
         <div className="p-6">
-          <div className="font-bold text-xl text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary-900 dark:bg-white rounded-lg flex items-center justify-center text-white dark:text-primary-900 font-serif font-black text-lg shadow-lg shadow-primary-900/20">S</div>
+          <div className="font-bold text-xl text-slate-900 dark:text-white tracking-tight flex items-center gap-2 cursor-pointer" onClick={() => navigate('home')}>
+            <div className="w-8 h-8 bg-gradient-to-br from-primary-900 to-slate-800 dark:from-white dark:to-slate-200 rounded-lg flex items-center justify-center text-white dark:text-primary-900 font-serif font-black text-lg shadow-lg shadow-primary-900/20">S</div>
             SOS Endo
           </div>
         </div>
@@ -92,7 +98,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <AnimatePresence>
         {isMobileMenuOpen && (
             <>
-                {/* Backdrop */}
                 <motion.div 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -100,7 +105,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="md:hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm"
                 />
-                {/* Drawer */}
                 <motion.div 
                     initial={{ x: '-100%' }}
                     animate={{ x: '0%' }}
@@ -137,9 +141,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                                 </motion.div>
                             </button>
                         </div>
-                        <div className="mt-4 text-center">
-                            <p className="text-xs text-slate-400">Versão 1.0 Mobile • @SOS_Endo</p>
-                        </div>
                     </div>
                 </motion.div>
             </>
@@ -147,7 +148,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       </AnimatePresence>
 
       {/* Main Content */}
-      <main className="flex-1 md:ml-64 w-full pt-[60px] md:pt-8 pb-[80px] md:pb-8 min-h-screen">
+      <main className="flex-1 md:ml-64 w-full pt-[60px] md:pt-0 pb-[80px] md:pb-0 min-h-screen">
          {children}
       </main>
 
@@ -156,7 +157,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="flex justify-around items-center h-[60px]">
               <NavIcon 
                 icon={Home} 
-                label="Início" 
+                label="Painel" 
                 isActive={currentView === 'home'} 
                 onClick={() => navigate('home')} 
               />
@@ -187,8 +188,8 @@ const NavIcon = ({ icon: Icon, label, isActive, onClick, isSpecial }: any) => {
         >
             {isSpecial ? (
                 <div className="relative">
-                    <div className={`absolute inset-0 rounded-full blur-md ${isActive ? 'bg-accent-500/50' : 'bg-primary-900/30 dark:bg-white/10'}`} />
-                    <div className={`relative w-14 h-14 rounded-full flex items-center justify-center border-4 border-slate-50 dark:border-slate-950 shadow-xl ${isActive ? 'bg-accent-500 text-white' : 'bg-primary-900 dark:bg-white text-white dark:text-primary-900'}`}>
+                    <div className={`absolute inset-0 rounded-full blur-md ${isActive ? 'bg-emerald-500/50' : 'bg-primary-900/30 dark:bg-white/10'}`} />
+                    <div className={`relative w-14 h-14 rounded-full flex items-center justify-center border-4 border-slate-50 dark:border-slate-950 shadow-xl ${isActive ? 'bg-emerald-500 text-white' : 'bg-primary-900 dark:bg-white text-white dark:text-primary-900'}`}>
                         <Icon className="w-7 h-7" />
                     </div>
                 </div>

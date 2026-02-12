@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { SCRIPTS } from '../data';
 import { Quote } from 'lucide-react';
@@ -25,7 +26,7 @@ export const ScriptList: React.FC = () => {
                 </h3>
              </div>
 
-             <Card className="bg-slate-50 dark:bg-slate-800/50 border-none shadow-none relative mb-4">
+             <Card className="bg-slate-50 dark:bg-slate-800/50 border-none shadow-none relative mb-4 h-fit">
                 <Quote className="absolute top-4 left-4 w-8 h-8 text-slate-200 dark:text-slate-700 -z-0" />
                 <p className="relative z-10 text-lg md:text-xl font-serif-text text-slate-700 dark:text-slate-200 italic leading-relaxed">
                   "{script.content}"

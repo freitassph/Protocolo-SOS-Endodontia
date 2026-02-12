@@ -78,7 +78,7 @@ export const ReferenceView: React.FC = () => {
             {activeTab === 'decision' && (
                 <div className="space-y-8">
                     {REFERENCE_TABLES.filter(t => ['t1', 't2', 't5'].includes(t.id)).map((table) => (
-                        <Card key={table.id} className="overflow-hidden p-0 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+                        <Card key={table.id} noPadding className="border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
                         <div className="bg-slate-50 dark:bg-slate-800/50 px-6 py-5 border-b border-slate-200 dark:border-slate-800">
                             <h3 className="font-bold text-xl text-slate-900 dark:text-white">{table.title}</h3>
                             {table.description && <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">{table.description}</p>}
@@ -125,7 +125,7 @@ export const ReferenceView: React.FC = () => {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
                             <div className="space-y-4">
                                 <div>
                                     <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Custo Materiais (R$)</label>
@@ -170,7 +170,7 @@ export const ReferenceView: React.FC = () => {
                      </Card>
 
                      {REFERENCE_TABLES.filter(t => ['t3', 't4'].includes(t.id)).map((table) => (
-                        <Card key={table.id} className="overflow-hidden p-0 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+                        <Card key={table.id} noPadding className="border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
                             <div className="bg-slate-50 dark:bg-slate-800/50 px-6 py-5 border-b border-slate-200 dark:border-slate-800">
                                 <h3 className="font-bold text-xl text-slate-900 dark:text-white">{table.title}</h3>
                             </div>
@@ -203,7 +203,7 @@ export const ReferenceView: React.FC = () => {
 
             {/* CHECKLISTS */}
             {activeTab === 'checklist' && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
                     {PRE_PROCEDURE_CHECKLIST.map((section, sectionIdx) => (
                     <Card key={sectionIdx} className="bg-emerald-50/50 dark:bg-emerald-900/10 border-emerald-100 dark:border-emerald-900/30 transition-colors">
                         <h3 className="font-bold text-emerald-800 dark:text-emerald-100 mb-6 text-lg border-b border-emerald-100 dark:border-emerald-800 pb-2 flex justify-between items-center">
@@ -260,7 +260,7 @@ export const ReferenceView: React.FC = () => {
                         />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
                         {filteredFaqs.length > 0 ? (
                             filteredFaqs.map((faq, idx) => (
                                 <Card key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors border-l-4 border-l-slate-300 dark:border-l-slate-700 hover:border-l-accent-500 bg-white dark:bg-slate-900/50 border-y border-r border-slate-200 dark:border-slate-800">
